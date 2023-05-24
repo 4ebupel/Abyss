@@ -1,13 +1,13 @@
 import { TreeNode } from "@/types"
-import { createContext } from "vm";
+import { createContext } from "react";
 
 type TreeContext = {
   tree: TreeNode;
   addNode: (parent: TreeNode) => void;
   deleteNode: (target: TreeNode) => void;
-  editNode: (target: TreeNode) => void;
+  editNode: (target: TreeNode, newTitle: string) => void;
 };
 
-const treeContext = createContext({} as TreeContext);
+const treeContext = createContext<TreeContext>({} as TreeContext);
 
 export default treeContext;
