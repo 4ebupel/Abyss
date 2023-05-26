@@ -1,7 +1,7 @@
-import { TreeNode } from "@/types";
+import { TNode } from "@/types";
 import traverseTree from "./traverseTree";
 
-function getNewTree(tree: TreeNode, callback: (node: TreeNode) => void) {
+function getNewTree(tree: TNode, callback: (node: TNode) => void) {
   const res = {...tree};
 
   traverseTree(res, callback);

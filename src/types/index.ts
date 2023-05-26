@@ -1,8 +1,8 @@
-export type TreeNode = {
-  title: string;
+export type TNode = {
+  value: string;
   id: string;
-  isMain: boolean;
-  children?: TreeNode[];
+  main: boolean;
+  children?: TNode[];
 };
 
 export type Scale = {
@@ -10,6 +10,6 @@ export type Scale = {
   label: string;
 }
 
-export enum TreeNodeInit {
+export enum TNodeInit {
   value = 'New Category'
 }

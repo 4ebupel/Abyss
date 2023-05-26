@@ -1,55 +1,57 @@
-import treeContext from "@/lib/context/treeContext";
-import { TreeNode, TreeNodeInit } from "@/types"
-import { useContext, useEffect, useState } from "react";
+import NodeButtons from '../NodeButtons';
+
+import TreeContext from '@/lib/context/treeContext';
+import { useContext, useEffect, useState } from 'react';
+import { TNode, TNodeInit } from '@/types';
 
 import styles from './Node.module.scss';
-import NodeButtons from "../NodeButtons/NodeButtons";
 
 type Props = {
-  node: TreeNode;
+  node: TNode;
 };
 
-export default function Node(props: Props) {
-  const { editNode } = useContext(treeContext);
-  const [title, setTitle] = useState(props.node.title);
+function Node(props: Props) {
+  const { editNode } = useContext(TreeContext);
+  const [value, setValue] = useState(props.node.value);
   const [isEdit, setIsEdit] = useState(true);
 
   const children = () => {
     if (props.node.children?.length) {
       return (
-        <ul>
+        <ul className={styles['node__children']}>
           {props.node.children.map((child) => {
-            return <Node node={child} key={child.id} />
+            return <Node node={child} key={child.id} />;
           })}
         </ul>
       );
     }
+
     return null;
   };
 
   const nodeContent = () => {
     if (isEdit) {
       return (
-        <input 
-          type="text" 
+        <input
+          type="test"
           className={styles['node__content-input']}
-          value={title}
+          value={value}
           readOnly={!isEdit}
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(evt) => setValue(evt.target.value)}
         />
       );
     }
 
-    return <span className={styles['node__content-value']}>{title}</span>
+    return <span className={styles['node__content-value']}>{value}</span>;
   };
 
   function onSaveHandler() {
     setIsEdit(false);
-    editNode(props.node, title);
+    editNode(props.node, value);
   }
 
   function onUnsaveHandler() {
-    setTitle(TreeNodeInit.value);
+    setValue(TNodeInit.value);
     setIsEdit(false);
   }
 
@@ -58,14 +60,14 @@ export default function Node(props: Props) {
   }
 
   useEffect(() => {
-    if (props.node.isMain) {
-      editNode(props.node, title);
+    if (props.node.main) {
+      editNode(props.node, value);
     }
-  }, [title]);
+  }, [value]);
 
   return (
     <li
-      className={`${styles['node']} ${props.node.isMain && styles['node--main']}`}
+      className={`${styles['node']} ${props.node.main && styles['node--main']}`}
     >
       <div
         className={`${styles['node__content']} ${
@@ -73,7 +75,7 @@ export default function Node(props: Props) {
         }`}
       >
         {nodeContent()}
-        <NodeButtons 
+        <NodeButtons
           isEdit={isEdit}
           node={props.node}
           onSave={onSaveHandler}
@@ -83,5 +85,7 @@ export default function Node(props: Props) {
       </div>
       {children()}
     </li>
-  )
+  );
 }
+
+export default Node;

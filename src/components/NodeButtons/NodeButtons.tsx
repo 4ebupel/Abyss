@@ -1,6 +1,6 @@
 import TreeContext from "@/lib/context/treeContext";
 import { useContext } from "react";
-import { TreeNode } from "@/types";
+import { TNode } from "@/types";
 
 import { ReactComponent as PenIcon } from "@/assets/pen.svg";
 import { ReactComponent as PlusIcon } from "@/assets/plus.svg";
@@ -9,7 +9,7 @@ import { ReactComponent as CheckIcon } from "@/assets/check.svg";
 import styles from "./NodeButtons.module.scss";
 
 type Props = {
-  node: TreeNode;
+  node: TNode;
   isEdit: boolean;
   onSave: () => void;
   onUnsave: () => void;
@@ -20,7 +20,7 @@ export default function NodeButtons(props: Props) {
   const { addNode, deleteNode } = useContext(TreeContext);
 
   const content = () => {
-    if (props.node.isMain) {
+    if (props.node.main) {
       return plusButton();
     }
 

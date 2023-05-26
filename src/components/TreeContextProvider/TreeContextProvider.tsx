@@ -1,7 +1,7 @@
 import TreeContext from '@/lib/context/treeContext';
 import createNode from "@/lib/helpers/createNode";
 import getNewTree from "@/lib/helpers/getNewTree";
-import { TreeNode, TreeNodeInit } from "@/types";
+import { TNode, TNodeInit } from "@/types";
 import { useState } from "react";
 
 type Props = {
@@ -9,16 +9,16 @@ type Props = {
 };
 
 function TreeContextProvider(props: Props) {
-  const [tree, setTree] = useState(createNode({ value: 'Categories', isMain: true }));
+  const [tree, setTree] = useState(createNode({ value: 'Categories', main: true }));
 
-  function addNode(parent: TreeNode) {
+  function addNode(parent: TNode) {
     setTree(
       getNewTree(tree, (node) => {
         if (node.id === parent.id) {
           node.children = [...(node.children || [])];
           node.children.push(
             createNode({
-              value: TreeNodeInit.value,
+              value: TNodeInit.value,
             })
           );
         }
@@ -26,7 +26,7 @@ function TreeContextProvider(props: Props) {
     )
   }
 
-  function deleteNode(target: TreeNode) {
+  function deleteNode(target: TNode) {
     setTree(
       getNewTree(tree, (node) => {
         node.children?.forEach((child, idx) => {
@@ -38,11 +38,11 @@ function TreeContextProvider(props: Props) {
     );
   }
 
-  function editNode(target: TreeNode, newValue: string) {
+  function editNode(target: TNode, newValue: string) {
     setTree(
       getNewTree(tree, (node) => {
         if (target.id === node.id) {
-          node.title = newValue;
+          node.value = newValue;
         }
       })
     );

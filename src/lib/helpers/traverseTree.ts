@@ -1,6 +1,6 @@
-import { TreeNode } from "@/types";
+import { TNode } from "@/types";
 
-function traverseTree(node: TreeNode, callback: (node: TreeNode) => void) {
+function traverseTree(node: TNode, callback: (node: TNode) => void) {
   callback(node);
 
   node.children?.forEach((child) => {

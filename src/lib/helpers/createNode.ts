@@ -1,18 +1,18 @@
-import { TreeNode } from "@/types";
+import { TNode } from "@/types";
 import generateId from "./generateId";
 
 type Options = {
   value: string;
-  isMain?: boolean;
-  children?: TreeNode[];
+  main?: boolean;
+  children?: TNode[];
 }
 
-function createNode(options: Options): TreeNode {
-  const { isMain, value, children } = options;
+function createNode(options: Options): TNode {
+  const { main, value, children } = options;
 
   return {
-    title: value,
-    isMain: !!isMain,
+    value: value,
+    main: !!main,
     id: generateId(),
     children: children || [],
   }
