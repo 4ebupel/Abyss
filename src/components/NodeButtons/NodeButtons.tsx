@@ -36,7 +36,7 @@ export default function NodeButtons(props: Props) {
       <>
         <button
           className={`${styles["buttons__node-btn"]} ${styles["buttons__node--undo"]}`}
-          onClick={props.onUnsave}
+          onClick={() => deleteNode(props.node)}
         >
           <CrossIcon className={styles["buttons__node-btn-icon"]} />
         </button>
