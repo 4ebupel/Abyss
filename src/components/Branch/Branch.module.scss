@@ -1,4 +1,4 @@
-.node {
+.branch {
   position: relative;
 
   padding: 15px 60px;
@@ -30,7 +30,7 @@
     right: 50%;
   }
 
-  &:not(.node--main)::after {
+  &:not(.branch--main)::after {
     content: '';
 
     position: absolute;
@@ -61,7 +61,7 @@
       background-color: #fff;
       border: dashed 2px #E6E8EC;
 
-      & > .node__content-input {
+      & > .branch__content-input {
         color: #343841;
         pointer-events: all;
       }

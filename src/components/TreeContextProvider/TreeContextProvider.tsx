@@ -1,24 +1,24 @@
 import TreeContext from '@/lib/context/treeContext';
-import createNode from "@/lib/helpers/createNode";
+import createBranch from "@/lib/helpers/createBranch";
 import getNewTree from "@/lib/helpers/getNewTree";
-import { TNode, TNodeInit } from "@/types";
+import { TreeBranch, TreeBranchDefault } from "@/types";
 import { useState } from "react";
 
 type Props = {
   children: React.ReactNode;
 };
 
-function TreeContextProvider(props: Props) {
-  const [tree, setTree] = useState(createNode({ value: 'Categories', main: true }));
+function TreeContextProvider({ children }: Props) {
+  const [tree, setTree] = useState(createBranch({ value: 'Categories', main: true }));
 
-  function addNode(parent: TNode) {
+  function addBranch(parent: TreeBranch) {
     setTree(
-      getNewTree(tree, (node) => {
-        if (node.id === parent.id) {
-          node.children = [...(node.children || [])];
-          node.children.push(
-            createNode({
-              value: TNodeInit.value,
+      getNewTree(tree, (branch) => {
+        if (branch.id === parent.id) {
+          branch.children = [...(branch.children || [])];
+          branch.children.push(
+            createBranch({
+              value: TreeBranchDefault.value,
             })
           );
         }
@@ -26,31 +26,31 @@ function TreeContextProvider(props: Props) {
     )
   }
 
-  function deleteNode(target: TNode) {
+  function deleteBranch(target: TreeBranch) {
     setTree(
-      getNewTree(tree, (node) => {
-        node.children?.forEach((child, idx) => {
+      getNewTree(tree, (branch) => {
+        branch.children?.forEach((child, idx) => {
           if(child.id === target.id) {
-            node.children?.splice(idx, 1);
+            branch.children?.splice(idx, 1);
           }
         })
       })
     );
   }
 
-  function editNode(target: TNode, newValue: string) {
+  function editBranch(target: TreeBranch, newValue: string) {
     setTree(
-      getNewTree(tree, (node) => {
-        if (target.id === node.id) {
-          node.value = newValue;
+      getNewTree(tree, (branch) => {
+        if (target.id === branch.id) {
+          branch.value = newValue;
         }
       })
     );
   }
 
   return (
-    <TreeContext.Provider value={{ tree, addNode, deleteNode, editNode }}>
-        {props.children}
+    <TreeContext.Provider value={{ tree, addBranch, deleteBranch, editBranch }}>
+        {children}
     </TreeContext.Provider>
   );
 }

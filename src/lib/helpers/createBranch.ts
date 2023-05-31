@@ -1,13 +1,13 @@
-import { TNode } from "@/types";
+import { TreeBranch } from "@/types";
 import generateId from "./generateId";
 
 type Options = {
   value: string;
   main?: boolean;
-  children?: TNode[];
+  children?: TreeBranch[];
 }
 
-function createNode(options: Options): TNode {
+function createBranch(options: Options): TreeBranch {
   const { main, value, children } = options;
 
   return {
@@ -18,4 +18,4 @@ function createNode(options: Options): TNode {
   }
 }
 
-export default createNode;
+export default createBranch;

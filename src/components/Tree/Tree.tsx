@@ -1,6 +1,6 @@
 import treeContext from "@/lib/context/treeContext";
 import { forwardRef, useContext } from "react";
-import Node from "../Node/Node";
+import Branch from "../Branch/Branch";
 
 import styles from './Tree.module.scss';
 
@@ -21,7 +21,7 @@ const Tree = forwardRef<HTMLUListElement, Props>((props, ref) => {
       onMouseDown={onMouseDownHandler}
       ref={ref}
     >
-      <Node node={tree} />
+      <Branch branch={tree} />
     </ul>
   );
 })

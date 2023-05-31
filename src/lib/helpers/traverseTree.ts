@@ -1,9 +1,9 @@
-import { TNode } from "@/types";
+import { TreeBranch } from "@/types";
 
-function traverseTree(node: TNode, callback: (node: TNode) => void) {
-  callback(node);
+function traverseTree(branch: TreeBranch, callback: (branch: TreeBranch) => void) {
+  callback(branch);
 
-  node.children?.forEach((child) => {
+  branch.children?.forEach((child) => {
     traverseTree(child, callback);
   });
 }
