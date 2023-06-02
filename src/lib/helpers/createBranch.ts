@@ -7,9 +7,7 @@ type Options = {
   children?: TreeBranch[];
 }
 
-function createBranch(options: Options): TreeBranch {
-  const { main, value, children } = options;
-
+function createBranch({ main, value, children }: Options): TreeBranch {
   return {
     value: value,
     main: !!main,

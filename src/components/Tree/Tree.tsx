@@ -8,17 +8,13 @@ type Props = {
   onMouseDown: () => void;
 }
 
-const Tree = forwardRef<HTMLUListElement, Props>((props, ref) => {
+const Tree = forwardRef<HTMLUListElement, Props>(({ onMouseDown }, ref) => {
   const { tree } = useContext(treeContext);
-
-  function onMouseDownHandler() {
-    props.onMouseDown()
-  }
 
   return(
     <ul
       className={styles['tree']}
-      onMouseDown={onMouseDownHandler}
+      onMouseDown={onMouseDown}
       ref={ref}
     >
       <Branch branch={tree} />

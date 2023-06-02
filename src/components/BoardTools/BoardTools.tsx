@@ -59,7 +59,7 @@ const scaleOptions = [
   },
 ];
 
-function BoardTools(props: Props) {
+function BoardTools({ onMoveToCenter, onZoom }: Props) {
   const [currentScale, setCurrentScale] = useState({
     scale: 1,
     label: "100%",
@@ -120,15 +120,15 @@ function BoardTools(props: Props) {
   }
 
   useEffect(() => {
-    props.onZoom(currentScale)
-  }, [currentScale, props]);
+    onZoom(currentScale)
+  }, [currentScale, onZoom]);
 
   return (
     <div  className={styles['tools']}>
       <button className={styles['tools__list-view']}>List view</button>
       <button
         className={styles['tools__move-to-center']}
-        onClick={props.onMoveToCenter}
+        onClick={onMoveToCenter}
       >
         <LocationArrowIcon className={styles['tools__move-to-center-icon']}/>
       </button>

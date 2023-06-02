@@ -16,15 +16,15 @@ type Props = {
   onEdit: () => void;
 };
 
-export default function BranchButtons(props: Props) {
+export default function BranchButtons({ branch, isEdit, onSave, onEdit }: Props) {
   const { addBranch, deleteBranch } = useContext(TreeContext);
 
   const content = () => {
-    if (props.branch.main) {
+    if (branch.main) {
       return plusButton();
     }
 
-    if (props.isEdit) {
+    if (isEdit) {
       return editButtons();
     }
 
@@ -36,13 +36,13 @@ export default function BranchButtons(props: Props) {
       <>
         <button
           className={`${styles["buttons__branch-btn"]} ${styles["buttons__branch--undo"]}`}
-          onClick={() => deleteBranch(props.branch)}
+          onClick={() => deleteBranch(branch)}
         >
           <CrossIcon className={styles["buttons__branch-btn-icon"]} />
         </button>
         <button
           className={`${styles["buttons__branch-btn"]} ${styles["buttons__branch--confirm"]}`}
-          onClick={props.onSave}
+          onClick={onSave}
         >
           <CheckIcon className={styles['buttons__branch-btn-icon']} />
         </button>
@@ -54,7 +54,7 @@ export default function BranchButtons(props: Props) {
     return (
       <button
         className={styles["buttons__branch-btn"]}
-        onClick={() => addBranch(props.branch)}
+        onClick={() => addBranch(branch)}
       >
         <PlusIcon className={styles["buttons__branch-btn-icon"]} />
       </button>
@@ -65,12 +65,12 @@ export default function BranchButtons(props: Props) {
     return (
       <>
         {plusButton()}
-        <button className={styles["buttons__branch-btn"]} onClick={props.onEdit}>
+        <button className={styles["buttons__branch-btn"]} onClick={onEdit}>
           <PenIcon className={styles["buttons__branch-btn-icon"]} />
         </button>
         <button
           className={`${styles["buttons__branch-btn"]} ${styles["buttons_branch-btn--delete"]}`}
-          onClick={() => deleteBranch(props.branch)}
+          onClick={() => deleteBranch(branch)}
         >
           <CrossIcon className={styles["buttons__branch-btn-icon"]} />
         </button>
